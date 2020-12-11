@@ -5,13 +5,14 @@
  */
 package domain;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
  *
  * @author Mihailo
  */
-public class Review {
+public class Review implements Serializable{
     private int reviewID;
     private String reviewText;
     private int reviewScore;

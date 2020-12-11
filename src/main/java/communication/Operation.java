@@ -5,11 +5,13 @@
  */
 package communication;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Mihailo
  */
-public enum Operation {
+public enum Operation implements Serializable{
     LOGIN, INSERT_USER, UPDATE_USER, DELETE_USER,
     INSERT_MOVIE, UPDATE_MOVIE, DELETE_MOVIE, SELECT_MOVIES, SELECT_ALL_MOVIES, 
     INSERT_DIRECTOR, UPDATE_DIRECTOR, DELETE_DIRECTOR, SELECT_ALL_DIRECTORS,

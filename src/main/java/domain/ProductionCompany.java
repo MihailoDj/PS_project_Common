@@ -5,13 +5,14 @@
  */
 package domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  *
  * @author Mihailo
  */
-public class ProductionCompany {
+public class ProductionCompany implements Serializable{
     private int productionCompanyID;
     private String name;
     

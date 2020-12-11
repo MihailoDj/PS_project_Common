@@ -6,12 +6,13 @@
 package domain;
 
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
 /**
  *
  * @author Mihailo
  */
-public class MoviePoster {
+public class MoviePoster implements Serializable{
     private int moviePosterID;
     private BufferedImage posterImage;
 

@@ -5,13 +5,14 @@
  */
 package domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  *
  * @author Mihailo
  */
-public class Role {
+public class Role implements Serializable{
     private String roleName;
     private Movie movie;
     private Actor actor;

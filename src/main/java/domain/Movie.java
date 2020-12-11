@@ -5,6 +5,7 @@
  */
 package domain;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.Objects;
  *
  * @author Mihailo
  */
-public class Movie {
+public class Movie implements Serializable{
     private int movieID;
     private String name;
     private LocalDate releaseDate;
