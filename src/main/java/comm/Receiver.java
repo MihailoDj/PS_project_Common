@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package communication;
-
+package comm;
 import java.io.ObjectInputStream;
 import java.net.Socket;
 
@@ -20,12 +19,12 @@ public class Receiver {
     }
     
     public Object receive() throws Exception{
-        try {
+        try{
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
             return in.readObject();
-        } catch (Exception e) {
+        }catch(Exception e){
             e.printStackTrace();
-            throw new Exception("Error receiving object");
+            throw new Exception("Error receiving object!\n" + e.getMessage());
         }
     }
 }

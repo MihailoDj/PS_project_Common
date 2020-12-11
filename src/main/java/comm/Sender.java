@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package communication;
+package comm;
 
 import java.io.BufferedOutputStream;
 import java.io.ObjectOutputStream;
@@ -20,14 +20,14 @@ public class Sender {
         this.socket = socket;
     }
     
-    public void send(Object obj) throws Exception{
-        try {
+    public void send(Object object) throws Exception{
+        try{
             ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
-            out.writeObject(obj);
+            out.writeObject(object);
             out.flush();
-        } catch (Exception e) {
+        }catch(Exception e){
             e.printStackTrace();
-            throw new Exception("Error sending object");
+            throw new Exception("Error sending object!\n" + e.getMessage());
         }
     }
 }
