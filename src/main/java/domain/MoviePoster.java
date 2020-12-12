@@ -6,7 +6,11 @@
 package domain;
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -14,7 +18,7 @@ import java.io.Serializable;
  */
 public class MoviePoster implements Serializable{
     private int moviePosterID;
-    private BufferedImage posterImage;
+    private transient BufferedImage posterImage;
 
     public MoviePoster() {
     }
@@ -40,5 +44,13 @@ public class MoviePoster implements Serializable{
         this.posterImage = posterImage;
     }
     
-    
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+        ImageIO.write(this.posterImage, "png", out);
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        this.posterImage = ImageIO.read(in);
+    }
 }
