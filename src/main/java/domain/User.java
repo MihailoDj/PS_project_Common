@@ -13,7 +13,7 @@ import java.util.Objects;
  * @author Mihailo
  */
 public class User implements Serializable{
-    private int userID;
+    private Long userID;
     private String username;
     private String password;
     private boolean admin;
@@ -22,18 +22,18 @@ public class User implements Serializable{
         
     }
 
-    public User(int userID, String username, String password, boolean admin) {
+    public User(Long userID, String username, String password, boolean admin) {
         this.userID = userID;
         this.username = username;
         this.password = password;
         this.admin = admin;
     }
 
-    public int getUserID() {
+    public Long getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(Long userID) {
         this.userID = userID;
     }
 
@@ -63,11 +63,11 @@ public class User implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 29 * hash + this.userID;
-        hash = 29 * hash + Objects.hashCode(this.username);
-        hash = 29 * hash + Objects.hashCode(this.password);
-        hash = 29 * hash + (this.admin ? 1 : 0);
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.userID);
+        hash = 97 * hash + Objects.hashCode(this.username);
+        hash = 97 * hash + Objects.hashCode(this.password);
+        hash = 97 * hash + (this.admin ? 1 : 0);
         return hash;
     }
 
@@ -89,6 +89,8 @@ public class User implements Serializable{
         return true;
     }
 
+    
+    
     @Override
     public String toString() {
         return username;

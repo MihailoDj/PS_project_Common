@@ -17,7 +17,7 @@ import java.util.Objects;
  * @author Mihailo
  */
 public class Movie implements Serializable{
-    private int movieID;
+    private Long movieID;
     private String name;
     private LocalDate releaseDate;
     private String description;
@@ -36,7 +36,7 @@ public class Movie implements Serializable{
         this.moviePoster = new MoviePoster();
     }
 
-    public Movie(int movieID, String name, LocalDate releaseDate, String description, double score, Director director) {
+    public Movie(Long movieID, String name, LocalDate releaseDate, String description, double score, Director director) {
         this.movieID = movieID;
         this.name = name;
         this.releaseDate = releaseDate;
@@ -49,11 +49,11 @@ public class Movie implements Serializable{
         this.moviePoster = new MoviePoster();
     }
     
-    public int getMovieID() {
+    public Long getMovieID() {
         return movieID;
     }
 
-    public void setMovieID(int movieID) {
+    public void setMovieID(Long movieID) {
         this.movieID = movieID;
     }
 
@@ -131,13 +131,17 @@ public class Movie implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 71 * hash + this.movieID;
-        hash = 71 * hash + Objects.hashCode(this.name);
-        hash = 71 * hash + Objects.hashCode(this.releaseDate);
-        hash = 71 * hash + Objects.hashCode(this.description);
-        hash = 71 * hash + (int) (Double.doubleToLongBits(this.score) ^ (Double.doubleToLongBits(this.score) >>> 32));
-        hash = 71 * hash + Objects.hashCode(this.director);
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.movieID);
+        hash = 59 * hash + Objects.hashCode(this.name);
+        hash = 59 * hash + Objects.hashCode(this.releaseDate);
+        hash = 59 * hash + Objects.hashCode(this.description);
+        hash = 59 * hash + (int) (Double.doubleToLongBits(this.score) ^ (Double.doubleToLongBits(this.score) >>> 32));
+        hash = 59 * hash + Objects.hashCode(this.director);
+        hash = 59 * hash + Objects.hashCode(this.roles);
+        hash = 59 * hash + Objects.hashCode(this.movieGenres);
+        hash = 59 * hash + Objects.hashCode(this.productions);
+        hash = 59 * hash + Objects.hashCode(this.moviePoster);
         return hash;
     }
 
@@ -161,6 +165,8 @@ public class Movie implements Serializable{
         }
         return true;
     }
+
+    
 
     @Override
     public String toString() {

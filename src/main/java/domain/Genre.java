@@ -13,22 +13,22 @@ import java.util.Objects;
  * @author Mihailo
  */
 public class Genre implements Serializable{
-   private int genreID;
+   private Long genreID;
    private String name;
 
     public Genre() {
     }
 
-    public Genre(int genreID, String name) {
+    public Genre(Long genreID, String name) {
         this.genreID = genreID;
         this.name = name;
     }
 
-    public int getGenreID() {
+    public Long getGenreID() {
         return genreID;
     }
 
-    public void setGenreID(int genreID) {
+    public void setGenreID(Long genreID) {
         this.genreID = genreID;
     }
 
@@ -42,9 +42,9 @@ public class Genre implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + this.genreID;
-        hash = 29 * hash + Objects.hashCode(this.name);
+        int hash = 5;
+        hash = 41 * hash + Objects.hashCode(this.genreID);
+        hash = 41 * hash + Objects.hashCode(this.name);
         return hash;
     }
 

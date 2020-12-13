@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  * @author Mihailo
  */
 public class Review implements Serializable{
-    private int reviewID;
+    private Long reviewID;
     private String reviewText;
     private int reviewScore;
     private LocalDateTime reviewDate;
@@ -23,7 +23,7 @@ public class Review implements Serializable{
     public Review() {
     }
 
-    public Review(int reviewID, String reviewText, int reviewScore, Movie movie, User user) {
+    public Review(Long reviewID, String reviewText, int reviewScore, Movie movie, User user) {
         this.reviewID = reviewID;
         this.reviewText = reviewText;
         this.reviewScore = reviewScore;
@@ -32,11 +32,11 @@ public class Review implements Serializable{
         this.reviewDate = LocalDateTime.now();
     }
 
-    public int getReviewID() {
+    public Long getReviewID() {
         return reviewID;
     }
 
-    public void setReviewID(int reviewID) {
+    public void setReviewID(Long reviewID) {
         this.reviewID = reviewID;
     }
 

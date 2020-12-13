@@ -17,22 +17,22 @@ import javax.imageio.ImageIO;
  * @author Mihailo
  */
 public class MoviePoster implements Serializable{
-    private int moviePosterID;
+    private Long moviePosterID;
     private transient BufferedImage posterImage;
 
     public MoviePoster() {
     }
 
-    public MoviePoster(int moviePosterID, BufferedImage posterImage) {
+    public MoviePoster(Long moviePosterID, BufferedImage posterImage) {
         this.moviePosterID = moviePosterID;
         this.posterImage = posterImage;
     }
 
-    public int getMoviePosterID() {
+    public Long getMoviePosterID() {
         return moviePosterID;
     }
 
-    public void setMoviePosterID(int moviePosterID) {
+    public void setMoviePosterID(Long moviePosterID) {
         this.moviePosterID = moviePosterID;
     }
 

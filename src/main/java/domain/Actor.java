@@ -13,7 +13,7 @@ import java.util.Objects;
  * @author Mihailo
  */
 public class Actor implements Serializable{
-    private int actorID;
+    private Long actorID;
     private String firstName;
     private String lastName;
     private String biography;
@@ -22,11 +22,11 @@ public class Actor implements Serializable{
         
     }
 
-    public int getActorID() {
+    public Long getActorID() {
         return actorID;
     }
 
-    public void setActorID(int actorID) {
+    public void setActorID(Long actorID) {
         this.actorID = actorID;
     }
 
@@ -56,11 +56,11 @@ public class Actor implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 71 * hash + this.actorID;
-        hash = 71 * hash + Objects.hashCode(this.firstName);
-        hash = 71 * hash + Objects.hashCode(this.lastName);
-        hash = 71 * hash + Objects.hashCode(this.biography);
+        int hash = 7;
+        hash = 83 * hash + Objects.hashCode(this.actorID);
+        hash = 83 * hash + Objects.hashCode(this.firstName);
+        hash = 83 * hash + Objects.hashCode(this.lastName);
+        hash = 83 * hash + Objects.hashCode(this.biography);
         return hash;
     }
 
@@ -76,13 +76,13 @@ public class Actor implements Serializable{
             return false;
         }
         final Actor other = (Actor) obj;
-        if (this.actorID != other.actorID) {
-            return false;
-        }
         if (!Objects.equals(this.firstName, other.firstName)) {
             return false;
         }
         if (!Objects.equals(this.lastName, other.lastName)) {
+            return false;
+        }
+        if (!Objects.equals(this.actorID, other.actorID)) {
             return false;
         }
         return true;

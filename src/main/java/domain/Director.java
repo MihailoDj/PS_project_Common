@@ -14,7 +14,7 @@ import java.util.Objects;
  * @author Mihailo
  */
 public class Director implements Serializable{
-    private int directorID;
+    private Long directorID;
     private String firstName;
     private String lastName;
     private LocalDate dateOfBirth;
@@ -23,18 +23,18 @@ public class Director implements Serializable{
         
     }
 
-    public Director(int directorID, String firstName, String lastName, LocalDate dateOfBirth) {
+    public Director(Long directorID, String firstName, String lastName, LocalDate dateOfBirth) {
         this.directorID = directorID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
     }
 
-    public int getDirectorID() {
+    public Long getDirectorID() {
         return directorID;
     }
 
-    public void setDirectorID(int directorID) {
+    public void setDirectorID(Long directorID) {
         this.directorID = directorID;
     }
 
@@ -65,10 +65,10 @@ public class Director implements Serializable{
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 29 * hash + this.directorID;
-        hash = 29 * hash + Objects.hashCode(this.firstName);
-        hash = 29 * hash + Objects.hashCode(this.lastName);
-        hash = 29 * hash + Objects.hashCode(this.dateOfBirth);
+        hash = 17 * hash + Objects.hashCode(this.directorID);
+        hash = 17 * hash + Objects.hashCode(this.firstName);
+        hash = 17 * hash + Objects.hashCode(this.lastName);
+        hash = 17 * hash + Objects.hashCode(this.dateOfBirth);
         return hash;
     }
 
