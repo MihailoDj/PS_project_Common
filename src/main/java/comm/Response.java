@@ -14,14 +14,16 @@ import java.io.Serializable;
 public class Response implements Serializable{
     private Object result;
     private Exception exception;
+    private Operation operation;
 
     public Response() {
         
     }
     
-    public Response(Object result, Exception exception) {
+    public Response(Object result, Exception exception, Operation operation) {
         this.result = result;
         this.exception = exception;
+        this.operation = operation;
     }
 
     public Exception getException() {
@@ -38,6 +40,14 @@ public class Response implements Serializable{
 
     public void setResult(Object result) {
         this.result = result;
+    }
+
+    public Operation getOperation() {
+        return operation;
+    }
+
+    public void setOperation(Operation operation) {
+        this.operation = operation;
     }
     
     
