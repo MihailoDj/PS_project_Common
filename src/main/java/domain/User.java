@@ -16,17 +16,17 @@ public class User implements Serializable{
     private Long userID;
     private String username;
     private String password;
-    private boolean admin;
+    private String status = "offline";
 
     public User() {
         
     }
 
-    public User(Long userID, String username, String password, boolean admin) {
+    public User(Long userID, String username, String password, String status) {
         this.userID = userID;
         this.username = username;
         this.password = password;
-        this.admin = admin;
+        this.status = status;
     }
 
     public Long getUserID() {
@@ -53,24 +53,14 @@ public class User implements Serializable{
         this.password = password;
     }
 
-    public boolean isAdmin() {
-        return admin;
+    public String getStatus() {
+        return status;
     }
 
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
+    public void setStatus(String status) {
+        this.status = status;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.userID);
-        hash = 97 * hash + Objects.hashCode(this.username);
-        hash = 97 * hash + Objects.hashCode(this.password);
-        hash = 97 * hash + (this.admin ? 1 : 0);
-        return hash;
-    }
-
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -89,8 +79,6 @@ public class User implements Serializable{
         return true;
     }
 
-    
-    
     @Override
     public String toString() {
         return username;
