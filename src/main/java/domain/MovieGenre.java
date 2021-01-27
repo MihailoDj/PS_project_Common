@@ -5,14 +5,14 @@
  */
 package domain;
 
-import java.io.Serializable;
+import java.sql.PreparedStatement;
 import java.util.Objects;
 
 /**
  *
  * @author Mihailo
  */
-public class MovieGenre implements Serializable{
+public class MovieGenre implements GenericEntity{
     private Genre genre;
     private Movie movie;
 
@@ -72,6 +72,47 @@ public class MovieGenre implements Serializable{
     @Override
     public String toString() {
         return "MovieGenre{" + "genre=" + genre + ", movie=" + movie + '}';
+    }
+
+    @Override
+    public String getTableName() {
+        return "movie_genre";
+    }
+
+    @Override
+    public String getColumnNamesForInsert() {
+        return "genreID, movieID";
+    }
+
+    @Override
+    public void getInsertValues(PreparedStatement statement) throws Exception{
+        statement.setLong(1, genre.getGenreID());
+        statement.setLong(2, movie.getMovieID());
+    }
+
+    @Override
+    public void setId(Long id) {
+        
+    }
+
+    @Override
+    public int getColumnCount() {
+        return 2;
+    }
+
+    @Override
+    public String getColumnNamesForUpdate() {
+        return "";
+    }
+
+    @Override
+    public String getConditionForUpdate() {
+        return "";
+    }
+
+    @Override
+    public String getConditionForDelete() {
+        return "movieID = " + movie.getMovieID();
     }
     
     

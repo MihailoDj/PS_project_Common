@@ -5,7 +5,7 @@
  */
 package domain;
 
-import java.io.Serializable;
+import java.sql.PreparedStatement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.Objects;
  *
  * @author Mihailo
  */
-public class Movie implements Serializable{
+public class Movie implements GenericEntity{
     private Long movieID;
     private String name;
     private LocalDate releaseDate;
@@ -171,5 +171,52 @@ public class Movie implements Serializable{
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public String getTableName() {
+        return "movie";
+    }
+
+    @Override
+    public String getColumnNamesForInsert() {
+        return "movieID, name, releasedate, score, description, directorid, movieposterID";
+    }
+
+    @Override
+    public void getInsertValues(PreparedStatement statement) throws Exception{
+        statement.setLong(1, movieID);
+        statement.setString(2, name);
+        statement.setObject(3, releaseDate, java.sql.Types.DATE);
+        statement.setDouble(4, score);
+        statement.setString(5, description);
+        statement.setLong(6, director.getDirectorID());
+        statement.setLong(7, moviePoster.getMoviePosterID());
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.movieID = id;
+    }
+
+    @Override
+    public int getColumnCount() {
+        return 7;
+    }
+
+    @Override
+    public String getColumnNamesForUpdate() {
+        return "movieID=?, name=?, releasedate=?, score=?, description=?, directorID=?,"
+                    + " movieposterID=?";
+    }
+
+    @Override
+    public String getConditionForUpdate() {
+        return "movieID = " + movieID;
+    }
+
+    @Override
+    public String getConditionForDelete() {
+        return "movieID = " + movieID;
     }
 }

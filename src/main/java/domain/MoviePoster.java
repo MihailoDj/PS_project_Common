@@ -6,17 +6,20 @@
 package domain;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.sql.PreparedStatement;
 import javax.imageio.ImageIO;
 
 /**
  *
  * @author Mihailo
  */
-public class MoviePoster implements Serializable{
+public class MoviePoster implements GenericEntity{
     private Long moviePosterID;
     private transient BufferedImage posterImage;
 
@@ -52,5 +55,51 @@ public class MoviePoster implements Serializable{
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
         this.posterImage = ImageIO.read(in);
+    }
+
+    @Override
+    public String getTableName() {
+        return "movieposter";
+    }
+
+    @Override
+    public String getColumnNamesForInsert() {
+        return "movieposterID, posterimage";
+    }
+
+    @Override
+    public void getInsertValues(PreparedStatement statement) throws Exception{
+        statement.setLong(1, moviePosterID);
+            
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(posterImage, "jpg", baos);
+        InputStream imageStream = new ByteArrayInputStream(baos.toByteArray());
+
+        statement.setBlob(2, imageStream);
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.moviePosterID = id;
+    }
+
+    @Override
+    public int getColumnCount() {
+        return 2;
+    }
+
+    @Override
+    public String getColumnNamesForUpdate() {
+        return "";
+    }
+
+    @Override
+    public String getConditionForUpdate() {
+        return "";
+    }
+
+    @Override
+    public String getConditionForDelete() {
+        return "movieposterID = " + moviePosterID;
     }
 }
