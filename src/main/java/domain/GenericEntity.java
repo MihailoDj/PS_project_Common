@@ -21,4 +21,8 @@ public interface GenericEntity extends Serializable{
     String getColumnNamesForUpdate();
     String getConditionForUpdate();
     String getConditionForDelete();
+    String getColumnNamesForSelect();
+    String getTableForSelect();
+    String getConditionForSelect();
+    String getConditionForSelectSpecific();
 }

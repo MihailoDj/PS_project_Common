@@ -102,4 +102,24 @@ public class MoviePoster implements GenericEntity{
     public String getConditionForDelete() {
         return "movieposterID = " + moviePosterID;
     }
+
+    @Override
+    public String getColumnNamesForSelect() {
+        return "";
+    }
+
+    @Override
+    public String getTableForSelect() {
+        return "";
+    }
+
+    @Override
+    public String getConditionForSelect() {
+        return "";
+    }
+
+    @Override
+    public String getConditionForSelectSpecific() {
+        return "";
+    }
 }

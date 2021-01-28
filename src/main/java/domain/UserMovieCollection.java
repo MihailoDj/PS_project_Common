@@ -5,14 +5,14 @@
  */
 package domain;
 
-import java.io.Serializable;
+import java.sql.PreparedStatement;
 import java.util.Objects;
 
 /**
  *
  * @author Mihailo
  */
-public class UserMovieCollection implements Serializable{
+public class UserMovieCollection implements GenericEntity{
     private Movie movie;
     private User user;
 
@@ -67,6 +67,70 @@ public class UserMovieCollection implements Serializable{
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String getTableName() {
+        return "collection";
+    }
+
+    @Override
+    public String getColumnNamesForInsert() {
+        return "movieID, userID";
+    }
+
+    @Override
+    public void getInsertValues(PreparedStatement statement) throws Exception {
+        statement.setLong(1, movie.getMovieID());
+        statement.setLong(2, user.getUserID());
+    }
+
+    @Override
+    public int getColumnCount() {
+        return 2;
+    }
+
+    @Override
+    public void setId(Long id) {
+
+    }
+
+    @Override
+    public String getColumnNamesForUpdate() {
+        return "";
+    }
+
+    @Override
+    public String getConditionForUpdate() {
+        return "";
+    }
+
+    @Override
+    public String getConditionForDelete() {
+        return "movieID=" + movie.getMovieID() + " AND "
+                    + "userID=" + user.getUserID();
+    }
+
+    @Override
+    public String getColumnNamesForSelect() {
+        return "*";
+    }
+
+    @Override
+    public String getTableForSelect() {
+        return "collection c JOIN movie m ON (c.movieID=m.movieID) "
+                    + "JOIN user u ON (u.userID=c.userID) JOIN director d ON (d.directorID=m.directorID) "
+                    + "JOIN movieposter mp ON (mp.movieposterID=m.movieposterID)";
+    }
+
+    @Override
+    public String getConditionForSelect() {
+        return "";
+    }
+
+    @Override
+    public String getConditionForSelectSpecific() {
+        return "c.userID=" + user.getUserID();
     }
     
     

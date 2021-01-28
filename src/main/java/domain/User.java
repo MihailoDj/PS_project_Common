@@ -5,14 +5,14 @@
  */
 package domain;
 
-import java.io.Serializable;
+import java.sql.PreparedStatement;
 import java.util.Objects;
 
 /**
  *
  * @author Mihailo
  */
-public class User implements Serializable{
+public class User implements GenericEntity{
     private Long userID;
     private String username;
     private String password;
@@ -82,5 +82,67 @@ public class User implements Serializable{
     @Override
     public String toString() {
         return username;
+    }
+
+    @Override
+    public String getTableName() {
+        return "user";
+    }
+
+    @Override
+    public String getColumnNamesForInsert() {
+        return "username, password, status";
+    }
+
+    @Override
+    public void getInsertValues(PreparedStatement statement) throws Exception {
+        statement.setString(1, username);
+        statement.setString(2, password);
+        statement.setString(3, status);
+    }
+
+    @Override
+    public int getColumnCount() {
+        return 3;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.userID = id;
+    }
+
+    @Override
+    public String getColumnNamesForUpdate() {
+        return "username=?, password=?, status=?";
+    }
+
+    @Override
+    public String getConditionForUpdate() {
+        return "userID=" +userID;
+    }
+
+    @Override
+    public String getConditionForDelete() {
+        return "userID=" +userID;
+    }
+
+    @Override
+    public String getColumnNamesForSelect() {
+        return "*";
+    }
+
+    @Override
+    public String getTableForSelect() {
+        return "user";
+    }
+
+    @Override
+    public String getConditionForSelect() {
+        return "";
+    }
+
+    @Override
+    public String getConditionForSelectSpecific() {
+        return "username=\"" + username + "\"";
     }
 }

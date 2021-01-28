@@ -5,14 +5,15 @@
  */
 package domain;
 
-import java.io.Serializable;
+import java.sql.PreparedStatement;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 /**
  *
  * @author Mihailo
  */
-public class Review implements Serializable{
+public class Review implements GenericEntity{
     private Long reviewID;
     private String reviewText;
     private int reviewScore;
@@ -83,6 +84,81 @@ public class Review implements Serializable{
     @Override
     public String toString() {
         return "Review{" + "reviewID=" + reviewID + ", reviewText=" + reviewText + ", reviewScore=" + reviewScore + ", reviewDate=" + reviewDate + ", movie=" + movie + ", user=" + user + '}';
+    }
+
+    @Override
+    public String getTableName() {
+        return "review";
+    }
+
+    @Override
+    public String getColumnNamesForInsert() {
+        return "reviewtext, reviewscore, reviewdate, movieID, userID";
+    }
+
+    @Override
+    public void getInsertValues(PreparedStatement statement) throws Exception {
+        reviewDate = LocalDateTime.now();
+        Timestamp timestamp = Timestamp.valueOf(reviewDate);
+        statement.setString(1, reviewText);
+        statement.setInt(2, reviewScore);
+        statement.setTimestamp(3, timestamp);
+        statement.setLong(4, movie.getMovieID());
+        statement.setLong(5, user.getUserID());
+    }
+
+    @Override
+    public int getColumnCount() {
+        return 6;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.reviewID = id;
+    }
+
+    @Override
+    public String getColumnNamesForUpdate() {
+        return "reviewtext=?, reviewscore=?, reviewdate=?, movieID=?, userID=?";
+    }
+
+    @Override
+    public String getConditionForUpdate() {
+        return "userID=" + user.getUserID() +
+                    " AND movieID=" + movie.getMovieID();
+    }
+
+    @Override
+    public String getConditionForDelete() {
+        return "userID=" + user.getUserID() +
+                    " AND movieID=" + movie.getMovieID();
+    }
+
+    @Override
+    public String getColumnNamesForSelect() {
+        return "*";
+    }
+
+    @Override
+    public String getTableForSelect() {
+        return "review r JOIN movie m ON (m.movieID=r.movieID) "
+                    + "JOIN director d ON (m.directorID = d.directorID) "
+                    + "JOIN movieposter mp ON (m.movieposterID = mp.movieposterID) "
+                    + "JOIN user u ON (u.userID=r.userID)";
+    }
+
+    @Override
+    public String getConditionForSelect() {
+        return "";
+    }
+
+    @Override
+    public String getConditionForSelectSpecific() {
+        if (user.getUserID() != 0l) {
+            return "r.userID=" + user.getUserID();
+        } else {
+            return "r.movieID=" + movie.getMovieID();
+        }
     }
     
     

@@ -116,5 +116,26 @@ public class Production implements GenericEntity{
         return "movieID = " + movie.getMovieID();
     }
 
+    @Override
+    public String getColumnNamesForSelect() {
+        return "pc.name as pcname, pc.pcID";
+    }
+
+    @Override
+    public String getTableForSelect() {
+        return "movie m JOIN production p ON (m.movieID = p.movieID) "
+                + "JOIN productioncompany pc ON (pc.pcID = p.productioncompanyID)";
+    }
+
+    @Override
+    public String getConditionForSelect() {
+        return "p.movieID = " + movie.getMovieID();
+    }
+
+    @Override
+    public String getConditionForSelectSpecific() {
+        return "";
+    }
+
     
 }

@@ -130,6 +130,27 @@ public class Role implements GenericEntity{
     public String getConditionForDelete() {
         return "movieID = " + movie.getMovieID();
     }
+
+    @Override
+    public String getColumnNamesForSelect() {
+        return "*";
+    }
+
+    @Override
+    public String getTableForSelect() {
+        return "movie m JOIN role r ON (m.movieID = r.movieID) "
+                + "JOIN actor a ON (r.actorID = a.actorID)";
+    }
+
+    @Override
+    public String getConditionForSelect() {
+        return "r.movieID = " + movie.getMovieID();
+    }
+
+    @Override
+    public String getConditionForSelectSpecific() {
+        return "";
+    }
     
     
 }

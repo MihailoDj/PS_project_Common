@@ -219,4 +219,25 @@ public class Movie implements GenericEntity{
     public String getConditionForDelete() {
         return "movieID = " + movieID;
     }
+
+    @Override
+    public String getColumnNamesForSelect() {
+        return "*,(SELECT AVG(reviewscore) FROM review r WHERE r.movieID=m.movieID) AS scr";
+    }
+
+    @Override
+    public String getTableForSelect() {
+        return "movie m JOIN director d ON (m.directorID = d.directorID) JOIN movieposter mp ON (m.movieposterID = mp.movieposterID)";
+    }
+
+    @Override
+    public String getConditionForSelect() {
+        return "";
+    }
+
+    @Override
+    public String getConditionForSelectSpecific() {
+        return "name like \"%" + name + "%\" OR firstname like \"%" + director.getFirstName() + "%\" OR "
+                    + "lastname like \"%" + director.getLastName() + "%\"";
+    }
 }

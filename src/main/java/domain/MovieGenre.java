@@ -114,6 +114,27 @@ public class MovieGenre implements GenericEntity{
     public String getConditionForDelete() {
         return "movieID = " + movie.getMovieID();
     }
+
+    @Override
+    public String getColumnNamesForSelect() {
+        return "g.name as gname, g.genreID as ggenreID ";
+    }
+
+    @Override
+    public String getTableForSelect() {
+        return "movie m JOIN movie_genre mg ON (m.movieID = mg.movieID) "
+                + "JOIN genre g ON (mg.genreID = g.genreID)";
+    }
+
+    @Override
+    public String getConditionForSelect() {
+        return "mg.movieID = " + movie.getMovieID();
+    }
+
+    @Override
+    public String getConditionForSelectSpecific() {
+        return "";
+    }
     
     
 }

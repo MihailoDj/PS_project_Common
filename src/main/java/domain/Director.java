@@ -5,7 +5,7 @@
  */
 package domain;
 
-import java.io.Serializable;
+import java.sql.PreparedStatement;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -13,7 +13,7 @@ import java.util.Objects;
  *
  * @author Mihailo
  */
-public class Director implements Serializable{
+public class Director implements GenericEntity{
     private Long directorID;
     private String firstName;
     private String lastName;
@@ -99,5 +99,67 @@ public class Director implements Serializable{
     @Override
     public String toString() {
         return firstName + " " + lastName;
+    }
+
+    @Override
+    public String getTableName() {
+        return "director";
+    }
+
+    @Override
+    public String getColumnNamesForInsert() {
+        return "firstname, lastname, dateofbirth";
+    }
+
+    @Override
+    public void getInsertValues(PreparedStatement statement) throws Exception {
+        statement.setString(1, firstName);
+        statement.setString(2, lastName);
+        statement.setObject(3, dateOfBirth, java.sql.Types.DATE);
+    }
+
+    @Override
+    public int getColumnCount() {
+        return 3;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.directorID = id;
+    }
+
+    @Override
+    public String getColumnNamesForUpdate() {
+        return "firstname=?, lastname=?, dateofbirth=?";
+    }
+
+    @Override
+    public String getConditionForUpdate() {
+        return "directorID=" + directorID;
+    }
+
+    @Override
+    public String getConditionForDelete() {
+        return "directorID="+ directorID;
+    }
+
+    @Override
+    public String getColumnNamesForSelect() {
+        return "*";
+    }
+
+    @Override
+    public String getTableForSelect() {
+        return "director ORDER BY firstname ASC, lastname";
+    }
+
+    @Override
+    public String getConditionForSelect() {
+        return "";
+    }
+
+    @Override
+    public String getConditionForSelectSpecific() {
+        return "";
     }
 }
