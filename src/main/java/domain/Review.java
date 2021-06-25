@@ -109,7 +109,7 @@ public class Review implements GenericEntity{
 
     @Override
     public int getColumnCount() {
-        return 6;
+        return 5;
     }
 
     @Override
