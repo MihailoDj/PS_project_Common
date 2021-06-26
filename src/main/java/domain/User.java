@@ -14,6 +14,7 @@ import java.util.Objects;
  */
 public class User implements GenericEntity{
     private Long userID;
+    private String email;
     private String username;
     private String password;
     private String status = "offline";
@@ -22,11 +23,20 @@ public class User implements GenericEntity{
         
     }
 
-    public User(Long userID, String username, String password, String status) {
+    public User(Long userID, String email, String username, String password, String status) {
         this.userID = userID;
+        this.email = email;
         this.username = username;
         this.password = password;
         this.status = status;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Long getUserID() {
@@ -91,19 +101,20 @@ public class User implements GenericEntity{
 
     @Override
     public String getColumnNamesForInsert() {
-        return "username, password, status";
+        return "email, username, password, status";
     }
 
     @Override
     public void getInsertValues(PreparedStatement statement) throws Exception {
-        statement.setString(1, username);
-        statement.setString(2, password);
-        statement.setString(3, status);
+        statement.setString(1, email);
+        statement.setString(2, username);
+        statement.setString(3, password);
+        statement.setString(4, status);
     }
 
     @Override
     public int getColumnCount() {
-        return 3;
+        return 4;
     }
 
     @Override
@@ -113,7 +124,7 @@ public class User implements GenericEntity{
 
     @Override
     public String getColumnNamesForUpdate() {
-        return "username=?, password=?, status=?";
+        return "email=?, username=?, password=?, status=?";
     }
 
     @Override
