@@ -25,7 +25,8 @@ public class MovieTableModel extends AbstractTableModel{
         "Release date", 
         "Description",
         "Score",
-        "Director"
+        "Director",
+        "Duration"
     };
     private final Class[] columnClasses = {
         Integer.class,
@@ -33,7 +34,8 @@ public class MovieTableModel extends AbstractTableModel{
         LocalDate.class,
         String.class,
         Double.class,
-        Director.class
+        Director.class,
+        Integer.class
     };
     
     public MovieTableModel(List<Movie> movies) {
@@ -64,6 +66,7 @@ public class MovieTableModel extends AbstractTableModel{
             case 3: return movie.getDescription();
             case 4: return movie.getScore();
             case 5: return movie.getDirector();
+            case 6: return movie.getDuration();
             default: return "N/A";
         }
     }
@@ -86,6 +89,9 @@ public class MovieTableModel extends AbstractTableModel{
                 case 5:
                     movie.setDirector((Director) value);
                     break;
+                case 6:
+                    movie.setDuration((Integer) value);
+                    break;
             }
             
         } catch (Exception ex) {
@@ -101,7 +107,7 @@ public class MovieTableModel extends AbstractTableModel{
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex == 1 || columnIndex == 2 || columnIndex == 3 || columnIndex == 5;
+        return columnIndex == 1 || columnIndex == 2 || columnIndex == 3 || columnIndex == 5 || columnIndex == 6;
     }
 
     @Override

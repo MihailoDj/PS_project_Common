@@ -27,7 +27,7 @@ public class Movie implements GenericEntity{
     private List<MovieGenre> movieGenres;
     private List<Production> productions;
     private MoviePoster moviePoster;
-    
+    private int duration;
     
     public Movie() {
         this.roles = new ArrayList<Role>();
@@ -36,13 +36,14 @@ public class Movie implements GenericEntity{
         this.moviePoster = new MoviePoster();
     }
 
-    public Movie(Long movieID, String name, LocalDate releaseDate, String description, double score, Director director) {
+    public Movie(Long movieID, String name, LocalDate releaseDate, String description, double score, Director director, int duration) {
         this.movieID = movieID;
         this.name = name;
         this.releaseDate = releaseDate;
         this.description = description;
         this.score = score;
         this.director = director;
+        this.duration = duration;
         this.roles = new ArrayList<Role>();
         this.movieGenres = new ArrayList<MovieGenre>();
         this.productions = new ArrayList<Production>();
@@ -129,21 +130,32 @@ public class Movie implements GenericEntity{
         this.moviePoster = moviePoster;
     }
 
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.movieID);
-        hash = 59 * hash + Objects.hashCode(this.name);
-        hash = 59 * hash + Objects.hashCode(this.releaseDate);
-        hash = 59 * hash + Objects.hashCode(this.description);
-        hash = 59 * hash + (int) (Double.doubleToLongBits(this.score) ^ (Double.doubleToLongBits(this.score) >>> 32));
-        hash = 59 * hash + Objects.hashCode(this.director);
-        hash = 59 * hash + Objects.hashCode(this.roles);
-        hash = 59 * hash + Objects.hashCode(this.movieGenres);
-        hash = 59 * hash + Objects.hashCode(this.productions);
-        hash = 59 * hash + Objects.hashCode(this.moviePoster);
+        int hash = 5;
+        hash = 71 * hash + Objects.hashCode(this.movieID);
+        hash = 71 * hash + Objects.hashCode(this.name);
+        hash = 71 * hash + Objects.hashCode(this.releaseDate);
+        hash = 71 * hash + Objects.hashCode(this.description);
+        hash = 71 * hash + (int) (Double.doubleToLongBits(this.score) ^ (Double.doubleToLongBits(this.score) >>> 32));
+        hash = 71 * hash + Objects.hashCode(this.director);
+        hash = 71 * hash + Objects.hashCode(this.roles);
+        hash = 71 * hash + Objects.hashCode(this.movieGenres);
+        hash = 71 * hash + Objects.hashCode(this.productions);
+        hash = 71 * hash + Objects.hashCode(this.moviePoster);
+        hash = 71 * hash + this.duration;
         return hash;
     }
+
+    
 
     @Override
     public boolean equals(Object obj) {
@@ -180,7 +192,7 @@ public class Movie implements GenericEntity{
 
     @Override
     public String getColumnNamesForInsert() {
-        return "movieID, name, releasedate, score, description, directorid, movieposterID";
+        return "movieID, name, releasedate, score, description, directorid, movieposterID, duration";
     }
 
     @Override
@@ -192,6 +204,7 @@ public class Movie implements GenericEntity{
         statement.setString(5, description);
         statement.setLong(6, director.getDirectorID());
         statement.setLong(7, moviePoster.getMoviePosterID());
+        statement.setInt(8, duration);
     }
 
     @Override
@@ -201,13 +214,13 @@ public class Movie implements GenericEntity{
 
     @Override
     public int getColumnCount() {
-        return 7;
+        return 8;
     }
 
     @Override
     public String getColumnNamesForUpdate() {
         return "movieID=?, name=?, releasedate=?, score=?, description=?, directorID=?,"
-                    + " movieposterID=?";
+                    + " movieposterID=?, duration=?";
     }
 
     @Override
