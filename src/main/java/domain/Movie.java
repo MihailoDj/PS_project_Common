@@ -235,7 +235,7 @@ public class Movie implements GenericEntity{
 
     @Override
     public String getColumnNamesForSelect() {
-        return "*,(SELECT AVG(reviewscore) FROM review r WHERE r.movieID=m.movieID) AS scr";
+        return "*";
     }
 
     @Override
@@ -252,5 +252,10 @@ public class Movie implements GenericEntity{
     public String getConditionForSelectSpecific() {
         return "name like \"%" + name + "%\" OR firstname like \"%" + director.getFirstName() + "%\" OR "
                     + "lastname like \"%" + director.getLastName() + "%\"";
+    }
+
+    @Override
+    public String getAdditionalQueries() {
+        return "";
     }
 }

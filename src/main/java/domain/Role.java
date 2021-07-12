@@ -151,6 +151,11 @@ public class Role implements GenericEntity{
     public String getConditionForSelectSpecific() {
         return "";
     }
+
+    @Override
+    public String getAdditionalQueries() {
+        return "";
+    }
     
     
 }

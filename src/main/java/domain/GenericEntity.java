@@ -25,4 +25,5 @@ public interface GenericEntity extends Serializable{
     String getTableForSelect();
     String getConditionForSelect();
     String getConditionForSelectSpecific();
+    String getAdditionalQueries();
 }

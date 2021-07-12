@@ -122,4 +122,9 @@ public class MoviePoster implements GenericEntity{
     public String getConditionForSelectSpecific() {
         return "";
     }
+
+    @Override
+    public String getAdditionalQueries() {
+        return "";
+    }
 }

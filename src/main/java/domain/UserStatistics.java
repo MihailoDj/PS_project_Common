@@ -133,5 +133,10 @@ public class UserStatistics implements GenericEntity{
         return "";
     }
 
+    @Override
+    public String getAdditionalQueries() {
+        return "";
+    }
+
     
 }

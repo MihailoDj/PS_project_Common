@@ -132,6 +132,11 @@ public class UserMovieCollection implements GenericEntity{
     public String getConditionForSelectSpecific() {
         return "c.userID=" + user.getUserID();
     }
+
+    @Override
+    public String getAdditionalQueries() {
+        return "";
+    }
     
     
 }

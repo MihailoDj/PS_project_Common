@@ -156,4 +156,9 @@ public class User implements GenericEntity{
     public String getConditionForSelectSpecific() {
         return "username=\"" + username + "\"";
     }
+
+    @Override
+    public String getAdditionalQueries() {
+        return "";
+    }
 }

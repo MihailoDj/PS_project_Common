@@ -124,14 +124,18 @@ public class Review implements GenericEntity{
 
     @Override
     public String getConditionForUpdate() {
-        return "userID=" + user.getUserID() +
-                    " AND movieID=" + movie.getMovieID();
+        return "userID=" + user.getUserID() + " AND movieID=" + movie.getMovieID()
+                + "; UPDATE movie m SET score = (SELECT AVG(reviewscore) FROM review r "
+                + "WHERE r.movieID = " + movie.getMovieID()+ ") "
+                + "WHERE m.movieID = " + movie.getMovieID();
     }
 
     @Override
     public String getConditionForDelete() {
-        return "userID=" + user.getUserID() +
-                    " AND movieID=" + movie.getMovieID();
+        return "userID=" + user.getUserID() + " AND movieID=" + movie.getMovieID()
+                + "; UPDATE movie m SET score = (SELECT AVG(reviewscore) FROM review r "
+                + "WHERE r.movieID = " + movie.getMovieID()+ ") "
+                + "WHERE m.movieID = " + movie.getMovieID();
     }
 
     @Override
@@ -159,6 +163,13 @@ public class Review implements GenericEntity{
         } else {
             return "r.movieID=" + movie.getMovieID();
         }
+    }
+
+    @Override
+    public String getAdditionalQueries() {
+        return "; UPDATE movie m SET score = (SELECT AVG(reviewscore) FROM review r "
+                + "WHERE r.movieID = " + movie.getMovieID()+ ") "
+                + "WHERE m.movieID = " + movie.getMovieID();
     }
     
     
